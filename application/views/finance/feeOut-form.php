@@ -15,38 +15,58 @@
                         </div>
                         <div class="card-body modal-body">
                             <form method="post">
-                                <div class="form-group">
-                                    <label for="inputPemasukan"> Tanggal Saat Ini </label>
-                                    <input type="datetime-local" class="form-control" id="inputTanggal" value="<?= date('Y-m-d\TH:i:s'); ?>" disabled="disabled">
-                                    <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group date">
+                                        <label for="inputPemasukan"> Waktu Saat Ini </label>
+                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" disabled="disabled" name="timeOut">
+                                        <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
+                                    </div>
                                 </div>
-                            <form method="post">
-                                <div class="form-group">
-                                    <label for="inputPemasukan"> Jumlah Uang </label>
-                                    <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp.">
-                                    <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
+                                <div class="col-sm-6">
+                                    <div class="form-group date">
+                                        <label for="inputPemasukan"> Tanggal Saat Ini </label>
+                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" disabled="disabled" name="dateOut">
+                                        <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPemasukan"> Jenis Pengeluaran </label>
-                                    <select name="inputKategoriIn" class="form-control" id="inputKategoriIn">
-                                        <option value="1"> Listrik </option>
-                                        <option value="2"> Makan </option>
-                                        <option value="3"> Minum </option>
-                                        <option value="4"> Belanja </option>
-                                        <option value="5"> Utang </option>
-                                        <option value="6"> Kuliah </option>
-                                        <option value="7"> Orang Tua </option>
-                                        <option value="8"> Kost </option>
-                                        <option value="9"> Air </option>
-                                    </select>
-                                    <small id="emailHelp" class="form-text text-muted"> Dari mana pemasukkan anda didapat? </small>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputPemasukan"> Jumlah Uang </label>
+                                        <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeOut">
+                                        <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="inputInformasiPemasukkan" placeholder="Keterangan pengeluaran"></textarea>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputPemasukan"> Jenis Pengeluaran </label>
+                                        <select name="catOut" class="form-control" id="inputKategoriIn">
+                                            <option value="1"> Listrik </option>
+                                            <option value="2"> Makan </option>
+                                            <option value="3"> Minum </option>
+                                            <option value="4"> Belanja </option>
+                                            <option value="5"> Utang </option>
+                                            <option value="6"> Kuliah </option>
+                                            <option value="7"> Orang Tua </option>
+                                            <option value="8"> Kost </option>
+                                            <option value="9"> Air </option>
+                                        </select>
+                                        <small id="emailHelp" class="form-text text-muted"> Untuk keperluan apa anda mengeluarkan uang? </small>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" name="btn-pengeluaran" class="btn btn-danger" style="width: 100%;"> Kirim Data Pengeluaran </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="infOut" id="inputInformasiPemasukkan" placeholder="Keterangan pengeluaran"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" name="btnOut"  class="btn btn-danger" style="width: 100%;"> Kirim Data Pengeluaran </button>
+                                    </div>
                                 </div>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -66,6 +86,9 @@
         .modal-dialog {
             max-width: 100% !important;
             margin: 1rem auto;
+        }
+        textarea#inputInformasiPemasukkan {
+            height: 175px;
         }
     }
 </style>

@@ -65,7 +65,7 @@
         <div class="clearfix">
             <input class="btn btn-success" type="button" data-toggle="modal" data-target="#feeIn-form" value="( + ) Pemasukkan">
             <input class="btn btn-danger" type="button" data-toggle="modal" data-target="#feeOut-form" value="( - ) Pengeluaran">
-            <input class="btn btn-primary" type="button" data-toggle="modal" data-target="#simpanFinance" value="( ! ) Simpan Data">
+            <input class="btn btn-primary" type="button" data-toggle="modal" data-target="#simpanFinance" value="( ! ) Buat Laporan">
         </div>
     <!-- /#add-category -->
     </div>
