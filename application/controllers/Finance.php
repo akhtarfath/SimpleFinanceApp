@@ -35,7 +35,7 @@ class Finance extends CI_Controller {
 		$this->load->view('libraries/footer');
 	}
 
-	public function add() 
+	public function add()
 	{
 		$feeIn		= $this->FeeIn; 
 		$validation = $this->form_validation;
@@ -46,8 +46,26 @@ class Finance extends CI_Controller {
 			$feeIn -> save();
 			$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		}
+		else {
+			echo '<script> alert("Gagal!"); </script>';
+		}
+		
+		$data['page_title'] = "Asambang | Finance";
+		
+		$data['feeIn'] 		= $this->FeeIn->getAll();
+		$data['feeOut'] 	= $this->FeeOut->getAll();
 
-		$this->load->view('finance/index');
+		$data['day']		= $this->daydate->thisDay();
+		$data['date']		= $this->daydate->thisDate(date('Y-m-d'));
+
+		$this->load->view('libraries/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('finance/index', $data);
+		$this->load->view('finance/feeIn-form', $data);
+		$this->load->view('finance/feeOut-form');
+		$this->load->view('template/footer');
+		$this->load->view('libraries/footer');
 	}
 
 	public function edit($id = null) 

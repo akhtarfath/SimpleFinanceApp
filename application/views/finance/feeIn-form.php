@@ -14,7 +14,7 @@
                             </h4>
                         </div>
                         <div class="card-body modal-body">
-                            <form method="post">
+                            <form action="<?= base_url('finance/add'); ?>" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group date">
