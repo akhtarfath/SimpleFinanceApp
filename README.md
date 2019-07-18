@@ -1,2 +1,2 @@
 ## Finance App 
-build with CI
+build with CodeIgniter
