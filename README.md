@@ -1,2 +1,2 @@
 ## Finance App 
-build with CodeIgniter
+Powered by CodeIgniter
