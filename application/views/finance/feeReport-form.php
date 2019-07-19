@@ -37,7 +37,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPemasukan"> Total Saldo </label>
-                                        <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeIn" required="required">
+                                        <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeTotal" required="required" value="">
                                         <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
                                     </div>
                                 </div>

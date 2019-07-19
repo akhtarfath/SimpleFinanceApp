@@ -14,32 +14,23 @@
                             </h4>
                         </div>
                         <div class="card-body modal-body">
-                            <form action="<?= base_url('finance/addfee'); ?>" method="post" enctype="multipart/form-data">
+                            <form action="<?= base_url(); ?>finance/addfee" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Waktu Saat Ini </label>
-                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" disabled="disabled" name="timeIn" required="required">
-                                        <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
+                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" name="timeIn" required="required">
+                                        <small id="emailHelp" class="form-text text-muted"> Ketika anda menerima pemasukkan </small>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Tanggal Saat Ini </label>
-                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" disabled="disabled" name="dateIn" required="required">
+                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" name="dateIn" required="required" disabled="disabled">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" style="display: none;">
-                                <div class="col-sm-6">
-                                    <div class="form-group date">
-                                        <label for="inputPemasukan"> Waktu Saat Ini </label>
-                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" name="timeIn" required="required">
-                                        <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" style="display:none">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Tanggal Saat Ini </label>
                                         <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" name="dateIn" required="required">

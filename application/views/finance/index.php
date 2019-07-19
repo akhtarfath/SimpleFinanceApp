@@ -77,22 +77,20 @@
                     data-target="#feeOut-form" value="( - ) Pengeluaran">
         </div>
         <div class="clearfix">
-            <form action="<?= base_url(); ?>finance/makereport" method="post">
-                <div class="form-group date" style="display:none;">
-                    <label for="inputPemasukan"> Tanggal Saat Ini </label>
-                    <input type="date" class="form-control" id="inputTanggal" value="<?= $masuk->date_in; ?>" name="dateIn">
-                    <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
-                </div>
-                <div class="form-group" style="display:none;">
-                    <label for="inputPemasukan"> Jumlah Uang </label>
-                    <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeIn" value="<?= $total; ?>">
-                    <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
-                </div>
-                <div class="form-group btn">
-                    <input class="btn btn-primary" type="button" data-toggle="modal" 
-                        data-target="#feeReport-form" value="( ! ) Buat Laporan">
-                </div>
-            </form>
+            <div class="form-group date" style="display:none;">
+                <label for="inputPemasukan"> Tanggal Saat Ini </label>
+                <input type="date" class="form-control" id="inputTanggal" value="<?= $masuk->date_in; ?>" name="dateIn">
+                <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label for="inputPemasukan"> Jumlah Uang </label>
+                <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeIn" value="<?= $total; ?>">
+                <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
+            </div>
+            <div class="form-group btn">
+                <input class="btn btn-primary" type="button" data-toggle="modal" 
+                    data-target="#feeReport-form" value="( ! ) Buat Laporan">
+            </div>
         </div>
     <!-- /#add-category -->
     </div>

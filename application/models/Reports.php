@@ -2,7 +2,7 @@
 
 class Reports extends CI_Model
 {
-    private $tableName = "t_feeIn";
+    private $tableName = "t_reports";
 
     public function getAll()
     {
@@ -19,8 +19,8 @@ class Reports extends CI_Model
         $post = $this->input->post();
             
             $this->num_in       = uniqid();
-            $this->date         = $post[''];
-            $this->saldo        = $post[''];
+            $this->date         = $post['dateIn'];
+            $this->saldo        = $post['feeTotal'];
 
         $this->db->insert($this->tableName, $this);
     }
