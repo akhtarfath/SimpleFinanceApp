@@ -11,6 +11,8 @@ class Finance extends CI_Controller {
 		$this->load->model('FeeIn');
 		$this->load->model('FeeOut');
 
+		$this->load->model('Reports');
+
 		$this->load->library('DayDate');
 	}
 
@@ -30,6 +32,7 @@ class Finance extends CI_Controller {
 		$this->load->view('finance/index', $data);
 		$this->load->view('finance/feeIn-form', $data);
 		$this->load->view('finance/feeOut-form');
+		$this->load->view('finance/feeReport-form', $data);
 		$this->load->view('template/footer');
 		$this->load->view('libraries/footer');
 	}
@@ -50,6 +53,15 @@ class Finance extends CI_Controller {
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
 		echo '<script> window.location ="'. base_url() .'finance"; </script>';
+	}
+
+	public function makereport() 
+	{
+		$reports = $this->Reports;
+		$reports -> save();
+		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
+		
+		echo '<script> window.location ="'. base_url() .'report"; </script>';
 	}
 
 	public function edit($id = null) 

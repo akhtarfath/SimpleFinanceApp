@@ -19,14 +19,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Waktu Saat Ini </label>
-                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" disabled="disabled" name="timeIn">
+                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" disabled="disabled" name="timeIn" required="required">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Tanggal Saat Ini </label>
-                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" disabled="disabled" name="dateIn">
+                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" disabled="disabled" name="dateIn" required="required">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
                                     </div>
                                 </div>
@@ -35,14 +35,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Waktu Saat Ini </label>
-                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" name="timeIn">
+                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" name="timeIn" required="required">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Tanggal Saat Ini </label>
-                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" name="dateIn">
+                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" name="dateIn" required="required">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
                                     </div>
                                 </div>
@@ -51,14 +51,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="inputPemasukan"> Jumlah Uang </label>
-                                        <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeIn">
+                                        <input type="number" class="form-control" id="inputPemasukan" aria-describedby="feeIn" placeholder="Rp." name="feeIn" required="required">
                                         <small id="emailHelp" class="form-text text-muted"> Periksa jumlah angka 0 (nol) nya. </small>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="inputPemasukan"> Jenis Pemasukkan </label>
-                                        <select name="catIn" class="form-control" id="inputKategoriIn">
+                                        <select name="catIn" class="form-control" id="inputKategoriIn" required="required">
                                             <option value="1"> Gaji </option>
                                             <option value="2"> Teman </option>
                                             <option value="3"> Tak Terduga </option>
@@ -72,7 +72,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="inputInformasiPemasukkan" placeholder="Keterangan pemasukkan" name="infIn"></textarea>
+                                        <textarea class="form-control" id="inputInformasiPemasukkan" placeholder="Keterangan pemasukkan" name="infIn" required="required"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="btnIn"  class="btn btn-success" style="width: 100%;"> Kirim Data Pemasukkan </button>
