@@ -36,7 +36,7 @@ class Finance extends CI_Controller {
 
 	public function addfee()
 	{
-		$feeIn		= $this->FeeIn; 
+		$feeIn = $this->FeeIn; 
 		$feeIn -> save();
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
@@ -45,7 +45,7 @@ class Finance extends CI_Controller {
 
 	public function removefee()
 	{
-		$feeOut		= $this->feeOut; 
+		$feeOut = $this->FeeOut; 
 		$feeOut -> save();
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		

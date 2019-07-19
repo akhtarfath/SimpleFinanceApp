@@ -32,11 +32,12 @@ class FeeIn extends CI_Model
     {
         $post = $this->input->post();
             
-        $this->numIn            = $post['numIn'];
-        $this->dateIn           = $post["dateIn"];
-        $this->feeIn            = $post["feeIn"];
-        $this->catIn            = $post["catIn"];
-        $this->InformationIn    = $post["informationIn"];
+        $this->num_in            = $post['numIn'];
+        $this->time_in           = $post["timeIn"];
+        $this->fee_in            = $post["feeIn"];
+        $this->category_in       = $post["catIn"];
+        $this->information       = $post["infIn"];
+        $this->date_in           = $post["dateIn"];
 
         $this->db->update($this->tableName, $this, array('num_in' => $post['numIn']));
     }

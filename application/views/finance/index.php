@@ -1,4 +1,3 @@
-<?php error_reporting(1); ?>
 <!-- Content -->
 <div class="content">
     <!-- Animated -->
@@ -23,8 +22,8 @@
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> Jumlah Uang </th>
                                         </tr>
-                                <?php $no = 1; 
-                                    foreach($feeIn as $masuk): $status = "( + )"; ?> 
+                                <?php $no = 1;
+                                    foreach($feeIn as $masuk): $status = "( + )"; $In[] = $masuk->fee_in;?> 
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->time_in; ?></td>
@@ -32,8 +31,8 @@
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
                                             </tr>
-                                <?php $no++; endforeach;
-                                    foreach($feeOut as $keluar): $status = "( - )"; ?>
+                                <?php $no++; $feeIn = array_sum($In); endforeach;
+                                    foreach($feeOut as $keluar): $status = "( - )"; $Out[] = $keluar->fee_out; ?>
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->time_out; ?></td>
@@ -41,14 +40,14 @@
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($keluar->fee_out,2,',','.'); ?></td>
                                             </tr>
-                                <?php $no++; endforeach; ?>
+                                <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
                                     </table>
                                 </div>
                                 <div class="card-body">                                
                                     <table style="width: 100%; border-top: 1px solid #eee;">
                                         <tr>
                                             <td class="field" colspan="2"><b> Saldo Anda </b></td>
-                                            <?php $total = ($masuk->fee_in - $keluar->fee_out); 
+                                            <?php $total = ($feeIn - $feeOut); 
                                                 $masuk->fee_in = $total; ?>
                                             <td class="field" style="text-align: right;" colspan="3"><b><?= number_format($total,2,',','.'); ?></b></td>
                                         </tr>
