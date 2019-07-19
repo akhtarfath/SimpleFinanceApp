@@ -18,7 +18,7 @@
                                         $totalPengeluaran = array_sum($dataPengeluaran); ?>
                                     <?php endforeach; ?>
                                     <div class="stat-text"> Rp <span class="stats-count"> 
-                                        <?= number_format($totalPengeluaran,2,',','.'); ?> 
+                                        <?= number_format($totalPengeluaran,0,',','.'); ?> 
                                     </span></div>
                                     <div class="stat-heading"> Pengeluaran </div>
                                 </div>
