@@ -14,7 +14,7 @@
                             </h4>
                         </div>
                         <div class="card-body modal-body">
-                            <form method="post">
+                            <form action="<?= base_url('finance/removefee'); ?>" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group date">
@@ -27,6 +27,22 @@
                                     <div class="form-group date">
                                         <label for="inputPemasukan"> Tanggal Saat Ini </label>
                                         <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" disabled="disabled" name="dateOut">
+                                        <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="display: none;">
+                                <div class="col-sm-6">
+                                    <div class="form-group date">
+                                        <label for="inputPemasukan"> Waktu Saat Ini </label>
+                                        <input type="time" class="form-control" id="inputJam" value="<?= date('H:i:s'); ?>" name="timeOut">
+                                        <small id="emailHelp" class="form-text text-muted"> Maaf, waktu tidak dapat diubah </small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group date">
+                                        <label for="inputPemasukan"> Tanggal Saat Ini </label>
+                                        <input type="date" class="form-control" id="inputTanggal" value="<?= date('Y-m-d'); ?>" name="dateOut">
                                         <small id="emailHelp" class="form-text text-muted"> Maaf, Tanggal tidak dapat diubah </small>
                                     </div>
                                 </div>

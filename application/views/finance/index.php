@@ -24,21 +24,21 @@
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> Jumlah Uang </th>
                                         </tr>
                                 <?php $no = 1; 
-                                    foreach($feeIn as $masuk): ?> 
+                                    foreach($feeIn as $masuk): $status = "( + )"; ?> 
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->time_in; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->information; ?></td>
-                                                <td class="field" style="text-align: center;"></td>
+                                                <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
                                             </tr>
                                 <?php $no++; endforeach;
-                                    foreach($feeOut as $keluar): ?>
+                                    foreach($feeOut as $keluar): $status = "( - )"; ?>
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->time_out; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->information; ?></td>
-                                                <td class="field" style="text-align: center;"></td>
+                                                <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($keluar->fee_out,2,',','.'); ?></td>
                                             </tr>
                                 <?php $no++; endforeach; ?>

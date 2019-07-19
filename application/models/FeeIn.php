@@ -4,29 +4,6 @@ class FeeIn extends CI_Model
 {
     private $tableName = "t_feeIn";
 
-    public $numIn;
-    public $timeIn;
-    public $dateIn;
-    public $feeIn;
-    public $catIn;
-    public $informationIn;
-
-    public function rules() {
-        return [
-            ['field' => 'name',
-            'label' => 'Name',
-            'rules' => 'required'],
-
-            ['field' => 'price',
-            'label' => 'Price',
-            'rules' => 'numeric'],
-            
-            ['field' => 'description',
-            'label' => 'Description',
-            'rules' => 'required']
-        ];
-    }
-
     public function getAll()
     {
         return $this->db->get($this->tableName)->result();
@@ -41,12 +18,12 @@ class FeeIn extends CI_Model
     {
         $post = $this->input->post();
             
-            $this->numIn = uniqid();
-            $this->timeIn           = $post["timeIn"];
-            $this->dateIn           = $post["dateIn"];
-            $this->feeIn            = $post["feeIn"];
-            $this->catIn            = $post["catIn"];
-            $this->InformationIn    = $post["infIn"];
+            $this->num_in            = uniqid();
+            $this->time_in           = $post["timeIn"];
+            $this->fee_in            = $post["feeIn"];
+            $this->category_in       = $post["catIn"];
+            $this->information       = $post["infIn"];
+            $this->date_in           = $post["dateIn"];
 
         $this->db->insert($this->tableName, $this);
     }

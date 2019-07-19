@@ -11,7 +11,6 @@ class Finance extends CI_Controller {
 		$this->load->model('FeeIn');
 		$this->load->model('FeeOut');
 
-		$this->load->library('form_validation');
 		$this->load->library('DayDate');
 	}
 
@@ -35,37 +34,22 @@ class Finance extends CI_Controller {
 		$this->load->view('libraries/footer');
 	}
 
-	public function add()
+	public function addfee()
 	{
 		$feeIn		= $this->FeeIn; 
-		$validation = $this->form_validation;
-		$validation -> set_rules($feeIn->rules());
-
-		if($validation -> run()) 
-		{
-			$feeIn -> save();
-			$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
-		}
-		else {
-			echo '<script> alert("Gagal!"); </script>';
-		}
+		$feeIn -> save();
+		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
-		$data['page_title'] = "Asambang | Finance";
+		echo '<script> window.location ="'. base_url() .'finance"; </script>';
+	}
+
+	public function removefee()
+	{
+		$feeOut		= $this->feeOut; 
+		$feeOut -> save();
+		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
-		$data['feeIn'] 		= $this->FeeIn->getAll();
-		$data['feeOut'] 	= $this->FeeOut->getAll();
-
-		$data['day']		= $this->daydate->thisDay();
-		$data['date']		= $this->daydate->thisDate(date('Y-m-d'));
-
-		$this->load->view('libraries/header', $data);
-		$this->load->view('template/sidebar');
-		$this->load->view('template/navbar');
-		$this->load->view('finance/index', $data);
-		$this->load->view('finance/feeIn-form', $data);
-		$this->load->view('finance/feeOut-form');
-		$this->load->view('template/footer');
-		$this->load->view('libraries/footer');
+		echo '<script> window.location ="'. base_url() .'finance"; </script>';
 	}
 
 	public function edit($id = null) 
