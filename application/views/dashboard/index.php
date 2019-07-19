@@ -13,7 +13,13 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"> Rp <span class="count"> 30 </span> JT </div>
+                                    <?php foreach($feeOut as $pengeluaran): 
+                                        $dataPengeluaran[] = $pengeluaran->fee_out; 
+                                        $totalPengeluaran = array_sum($dataPengeluaran); ?>
+                                    <?php endforeach; ?>
+                                    <div class="stat-text"> Rp <span class="stats-count"> 
+                                        <?= number_format($totalPengeluaran,2,',','.'); ?> 
+                                    </span></div>
                                     <div class="stat-heading"> Pengeluaran </div>
                                 </div>
                             </div>
@@ -48,7 +54,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count"> 10 </span> JT </div>
-                                    <div class="stat-heading"> Tabungan </div>
+                                    <div class="stat-heading"> Saldo </div>
                                 </div>
                             </div>
                         </div>
@@ -113,3 +119,12 @@
 </div>
 <!-- /.content -->
 <div class="clearfix"></div>
+<style>
+    @media (min-width: 992px) {
+        .col-lg-3 {
+            -ms-flex: 0 0 25%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+</style>
