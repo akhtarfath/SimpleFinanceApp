@@ -20,10 +20,10 @@
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> Waktu </th>
                                             <th class="field pemasukkan" style="border-bottom: 1px solid #eee; text-align: left;"> Keterangan </td>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
-                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> Jumlah Uang </th>
+                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> Harga </th>
                                         </tr>
                                 <?php $no = 1;
-                                    foreach($feeIn as $masuk): $status = "( + )"; $In[] = $masuk->fee_in;?> 
+                                    foreach($feeIn as $masuk): $status = "(+)"; $In[] = $masuk->fee_in;?> 
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->time_in; ?></td>
@@ -32,7 +32,7 @@
                                                 <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
                                             </tr>
                                 <?php $no++; $feeIn = array_sum($In); endforeach;
-                                    foreach($feeOut as $keluar): $status = "( - )"; $Out[] = $keluar->fee_out; ?>
+                                    foreach($feeOut as $keluar): $status = "(-)"; $Out[] = $keluar->fee_out; ?>
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->time_out; ?></td>
@@ -43,17 +43,17 @@
                                 <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
                                     </table>
                                 </div>
-                                <div class="card-body">                                
-                                    <table style="width: 100%; border-top: 1px solid #eee;">
-                                        <tr>
-                                            <td class="field" colspan="2"><b> Saldo Anda </b></td>
-                                            <?php $total = ($feeIn - $feeOut); 
-                                                $masuk->fee_in = $total; ?>
-                                            <td class="field" style="text-align: right;" colspan="3"><b><?= number_format($total,2,',','.'); ?></b></td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div> <!-- /.card-body -->
+                            <div class="card-body">                                
+                                <table style="width: 100%; border-top: 1px solid #eee;">
+                                    <tr>
+                                        <td class="field" colspan="2"><b> Saldo Anda </b></td>
+                                        <?php $total = ($feeIn - $feeOut); 
+                                            $masuk->fee_in = $total; ?>
+                                        <td class="field" style="text-align: right;" colspan="3"><b><?= number_format($total,2,',','.'); ?></b></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div> <!-- /.row -->
                     <div class="card-body"></div>
