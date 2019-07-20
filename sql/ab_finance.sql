@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 18, 2019 at 10:06 PM
+-- Generation Time: Jul 20, 2019 at 12:01 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -77,13 +77,24 @@ INSERT INTO `t_categoryOut` (`id_categoryOut`, `cat_name`) VALUES
 --
 
 CREATE TABLE `t_feeIn` (
-  `num_in` int(11) NOT NULL,
+  `num_in` varchar(255) NOT NULL,
   `time_in` time NOT NULL,
   `fee_in` varchar(11) NOT NULL,
   `category_in` int(11) NOT NULL,
   `information` text NOT NULL,
   `date_in` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_feeIn`
+--
+
+INSERT INTO `t_feeIn` (`num_in`, `time_in`, `fee_in`, `category_in`, `information`, `date_in`) VALUES
+('5d310c5d500b1', '07:18:21', '1200000', 1, 'Website Finance App', '2019-07-19'),
+('5d3110127d0db', '07:34:07', '50000', 2, 'Bayar Hutang', '2019-07-19'),
+('5d31c7be5ead3', '20:37:49', '3000', 2, 'Terima Kasih :\')', '2019-07-19'),
+('5d31cca2f00fa', '20:56:31', '100000', 5, 'Jadi Ojek', '2019-07-19'),
+('5d31ccf4b70e7', '20:59:59', '100000', 2, 'Lagi Baik', '2019-07-19');
 
 -- --------------------------------------------------------
 
@@ -92,13 +103,25 @@ CREATE TABLE `t_feeIn` (
 --
 
 CREATE TABLE `t_feeOut` (
-  `num_out` int(11) NOT NULL,
+  `num_out` varchar(255) NOT NULL,
   `time_out` time NOT NULL,
   `fee_out` varchar(11) NOT NULL,
   `category_out` int(11) NOT NULL,
   `information` text NOT NULL,
   `date_out` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_feeOut`
+--
+
+INSERT INTO `t_feeOut` (`num_out`, `time_out`, `fee_out`, `category_out`, `information`, `date_out`) VALUES
+('5d310f81986d9', '07:30:35', '10000', 2, 'Baso', '2019-07-19'),
+('5d3113df03213', '07:50:18', '13000', 3, 'Nescafe', '2019-07-19'),
+('5d314fd7516fd', '12:06:09', '200000', 2, 'Traktir Temen', '2019-07-19'),
+('5d314ffe85cfd', '12:06:31', '100000', 4, 'Nonton Bareng Doi', '2019-07-19'),
+('5d315b88eb88c', '12:55:58', '2000', 5, 'Parkir', '2019-07-19'),
+('5d31ca4b3d25e', '20:48:21', '75000', 2, 'Buat 4 Orang', '2019-07-19');
 
 -- --------------------------------------------------------
 
@@ -107,8 +130,9 @@ CREATE TABLE `t_feeOut` (
 --
 
 CREATE TABLE `t_reports` (
-  `num_reports` int(11) NOT NULL,
-  `date` date NOT NULL
+  `num_reports` varchar(11) NOT NULL,
+  `date` date NOT NULL,
+  `saldo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -132,8 +156,8 @@ ALTER TABLE `t_categoryOut`
 --
 ALTER TABLE `t_feeIn`
   ADD PRIMARY KEY (`num_in`),
-  ADD KEY `category_in` (`category_in`),
-  ADD KEY `date_in` (`date_in`);
+  ADD KEY `date_in` (`date_in`),
+  ADD KEY `category_in` (`category_in`);
 
 --
 -- Indexes for table `t_feeOut`
@@ -148,7 +172,7 @@ ALTER TABLE `t_feeOut`
 --
 ALTER TABLE `t_reports`
   ADD PRIMARY KEY (`num_reports`),
-  ADD KEY `date` (`date`);
+  ADD UNIQUE KEY `date` (`date`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -165,24 +189,6 @@ ALTER TABLE `t_categoryIn`
 --
 ALTER TABLE `t_categoryOut`
   MODIFY `id_categoryOut` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `t_feeIn`
---
-ALTER TABLE `t_feeIn`
-  MODIFY `num_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `t_feeOut`
---
-ALTER TABLE `t_feeOut`
-  MODIFY `num_out` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `t_reports`
---
-ALTER TABLE `t_reports`
-  MODIFY `num_reports` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
