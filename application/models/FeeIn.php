@@ -6,7 +6,17 @@ class FeeIn extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get($this->tableName)->result();
+        $dateTime = date('Y-m-d');
+        
+        $this->db->select('*'); 
+        $this->db->join('t_categoryIn', 't_feeIn.id_categoryIn = t_categoryIn.id_categoryIn');
+        $this->db->from('t_feeIn');
+        $this->db->where('t_feeIn.date_in', $dateTime);
+
+        $query = $this->db->get();
+
+        return $query->result();
+        // return $this->db->get($this->tableName)->result();
     }
 
     public function getById($id)
@@ -21,7 +31,7 @@ class FeeIn extends CI_Model
             $this->num_in            = uniqid();
             $this->time_in           = $post["timeIn"];
             $this->fee_in            = $post["feeIn"];
-            $this->category_in       = $post["catIn"];
+            $this->id_categoryIn     = $post["catIn"];
             $this->information       = $post["infIn"];
             $this->date_in           = $post["dateIn"];
 

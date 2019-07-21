@@ -6,7 +6,15 @@ class FeeOut extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get($this->tableName)->result();
+        $this->db->select('
+            t_feeOut.*, t_categoryOut.* 
+        '); 
+        $this->db->join('t_categoryOut', 't_feeOut.id_categoryOut = t_categoryOut.id_categoryOut');
+        $this->db->from('t_feeOut');
+        $query = $this->db->get();
+        
+        return $query->result();
+        // return $this->db->get($this->tableName)->result();
     }
 
     public function getById($id)
@@ -21,7 +29,7 @@ class FeeOut extends CI_Model
             $this->num_out            = uniqid();
             $this->time_out           = $post["timeOut"];
             $this->fee_out            = $post["feeOut"];
-            $this->category_out       = $post["catOut"];
+            $this->id_categoryOut     = $post["catOut"];
             $this->information        = $post["infOut"];
             $this->date_out           = $post["dateOut"];
 
@@ -35,7 +43,7 @@ class FeeOut extends CI_Model
         $this->num_in             = $post['numOut'];
         $this->time_out           = $post["timeOut"];
         $this->fee_out            = $post["feeOut"];
-        $this->category_out       = $post["catOut"];
+        $this->id_categoryOut     = $post["catOut"];
         $this->information        = $post["infOut"];
         $this->date_out           = $post["dateOut"];
 

@@ -1,3 +1,4 @@
+<?php error_reporting(1); ?>
 <!-- Content -->
 <div class="content">
     <!-- Animated -->
@@ -18,6 +19,7 @@
                                         <tr>
                                             <th class="field no" style="border-bottom: 1px solid #eee; text-align: left;"> no </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> waktu </th>
+                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> penggunaan </th>
                                             <th class="field pemasukkan" style="border-bottom: 1px solid #eee; text-align: left;"> keterangan </td>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> harga </th>
@@ -27,28 +29,37 @@
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->time_in; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $masuk->cat_name; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->information; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
                                             </tr>
                                 <?php $no++; $feeIn = array_sum($In); endforeach; ?>
                                     <tr>
-                                        <td class="field" colspan="4" style="border-bottom: 1px solid #eee;"> <b> Total Pemasukkan </b></td>
+                                    <?php if($feeIn == null) { $feeIn = 0; ?>
+
+                                    <?php } else { ?>
+                                        <td class="field" colspan="5" style="border-bottom: 1px solid #eee;"> <b> Total Pemasukkan </b></td>
                                         <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeIn,2,',','.'); ?></b></td>
+                                    <?php } ?>
                                     </tr>
                                 <?php foreach($feeOut as $keluar): $status = "(-)"; $Out[] = $keluar->fee_out; ?>
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->time_out; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $keluar->cat_name; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->information; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($keluar->fee_out,2,',','.'); ?></td>
                                             </tr>
                                 <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
                                     <tr>
-                                        <td class="field" colspan="4" style="border-bottom: 1px solid #eee;"> <b> Total Pengeluaran </b></td>
-                                        <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeOut,2,',','.'); ?></b>
-                                        </td>
+                                    <?php if($feeOut == null) { $feeOut = 0; ?>
+
+                                    <?php } else { ?>
+                                        <td class="field" colspan="5" style="border-bottom: 1px solid #eee;"> <b> Total Pengeluaran </b></td>
+                                        <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeOut,2,',','.'); ?></b></td>
+                                    <?php } ?>
                                     </tr>
                                     </table>
                                 </div>
@@ -56,10 +67,19 @@
                             <div class="card-body">                                
                                 <table style="width: 100%; border-top: 1px solid #eee;">
                                     <tr>
+                                    <?php if($feeIn == null && $feeOut == null) {
+                                        $feeIn = 0; $feeOut = 0; ?> 
+
+                                        <td class="field" colspan="2"><b> Saldo </b></td>
+                                        <?php $total = ($feeIn - $feeOut); 
+                                            $masuk->fee_in = $total; ?>
+                                        <td class="field" style="text-align: right;" colspan="3"><b><?= number_format($total,2,',','.'); ?></b></td>
+                                    <?php } else { ?>
                                         <td class="field" colspan="2"><b> Saldo = <?= number_format($feeIn,0,',','.'); ?> - <?= number_format($feeOut,0,',','.'); ?> </b></td>
                                         <?php $total = ($feeIn - $feeOut); 
                                             $masuk->fee_in = $total; ?>
                                         <td class="field" style="text-align: right;" colspan="3"><b><?= number_format($total,2,',','.'); ?></b></td>
+                                    <?php } ?>
                                     </tr>
                                 </table>
                             </div>
