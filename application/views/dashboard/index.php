@@ -17,9 +17,18 @@
                                         $dataPengeluaran[] = $pengeluaran->fee_out; 
                                         $totalPengeluaran = array_sum($dataPengeluaran); ?>
                                     <?php endforeach; ?>
-                                    <div class="stat-text"> Rp <span class="stats-count"> 
-                                        <?= number_format($totalPengeluaran,0,',','.'); ?> 
-                                    </span></div>
+                                    <?php if($totalPengeluaran = null): $totalPengeluaran = 0;?>
+                                    <div class="stat-text"> Rp 
+                                        <span class="stats-count"> 
+                                            <?= number_format($totalPengeluaran,0,',','.'); ?> 
+                                        </span>
+                                    </div>
+                                    <?php endif; ?>
+                                    <div class="stat-text"> Rp 
+                                        <span class="stats-count"> 
+                                            <?= number_format($totalPengeluaran,0,',','.'); ?> 
+                                        </span>
+                                    </div>
                                     <div class="stat-heading"> Pengeluaran </div>
                                 </div>
                             </div>

@@ -29,18 +29,18 @@
                         <span class="count bg-danger">3</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <p class="red">You have 3 Notification</p>
+                        <p class="red"> Proses FinanceApp </p>
                         <a class="dropdown-item media" href="#">
                             <i class="fa fa-check"></i>
-                            <p>Server #1 overloaded.</p>
+                            <p> #1 Tambah Data </p>
                         </a>
                         <a class="dropdown-item media" href="#">
                             <i class="fa fa-info"></i>
-                            <p>Server #2 overloaded.</p>
+                            <p> #2 Hapus Data </p>
                         </a>
                         <a class="dropdown-item media" href="#">
                             <i class="fa fa-warning"></i>
-                            <p>Server #3 overloaded.</p>
+                            <p> #3 Laporan Keuangan </p>
                         </a>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="user-area dropdown float-right">
+            <!-- <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle" src="<?= base_url(); ?>assets/images/admin.jpg" alt="User Avatar">
                 </a>
@@ -102,7 +102,7 @@
 
                     <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

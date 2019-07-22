@@ -12,6 +12,7 @@ class FeeIn extends CI_Model
         $this->db->join('t_categoryIn', 't_feeIn.id_categoryIn = t_categoryIn.id_categoryIn');
         $this->db->from('t_feeIn');
         $this->db->where('t_feeIn.date_in', $dateTime);
+        $this->db->order_by('t_feeIn.time_in', 'ASC');
 
         $query = $this->db->get();
 

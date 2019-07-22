@@ -1,4 +1,3 @@
-<?php error_reporting(1); ?>
 <!-- Content -->
 <div class="content">
     <!-- Animated -->
@@ -15,7 +14,7 @@
                         <div class="col-lg-12">
                             <div class="card-body finance">
                                 <div class="card-body data-finance">
-                                    <table style="width: 100%;">
+                                    <table style="width: 100%;" class="table table-hover" id="dataTable" cellspacing="0">
                                         <tr>
                                             <th class="field no" style="border-bottom: 1px solid #eee; text-align: left;"> no </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> waktu </th>
@@ -23,7 +22,7 @@
                                             <th class="field pemasukkan" style="border-bottom: 1px solid #eee; text-align: left;"> keterangan </td>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> harga </th>
-                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> action </th>
+                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> aksi </th>
                                         </tr>
                                 <?php $no = 1;
                                     foreach($feeIn as $masuk): $status = "(+)"; $In[] = $masuk->fee_in;?> 
@@ -34,7 +33,9 @@
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->information; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
-                                                <td class="field" style="text-align: center;"><a href="?pemasukkan=<?= $masuk->num_in; ?>">&times;</a></td>
+                                                <td class="field" style="text-align: center;">
+                                                    <a onclick="deleteConfirm('<?= site_url().'finance/delete/'.$masuk->num_in; ?>')" href="#delete" class="btn btn-small text-danger">&times;</a>
+                                                </td>
                                             </tr>
                                 <?php $no++; $feeIn = array_sum($In); endforeach; ?>
                                     <tr>
@@ -54,7 +55,9 @@
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->information; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
                                                 <td class="field" style="text-align: right;"><?= number_format($keluar->fee_out,2,',','.'); ?></td>
-                                                <td class="field" style="text-align: center;"><a href="?pengeluaran=<?= $keluar->num_out; ?>">&times;</a></td>
+                                                <td class="field" style="text-align: center;">
+                                                    <a onclick="deleteConfirm('<?= site_url('finance/delete/'.$keluar->num_out); ?>')" href="#delete" class="btn btn-small text-danger">&times;</a>
+                                                </td>
                                             </tr>
                                 <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
                                     <tr>
@@ -96,10 +99,8 @@
         </div>
         <!--  /Traffic -->
         <div class="clearfix">
-                <input class="btn btn-success" type="button" data-toggle="modal" 
-                    data-target="#feeIn-form" value="( + ) Pemasukkan">
-                <input class="btn btn-danger" type="button" data-toggle="modal" 
-                    data-target="#feeOut-form" value="( - ) Pengeluaran">
+            <input class="btn btn-success" type="button" data-toggle="modal" data-target="#feeIn-form" value="( + ) Pemasukkan">
+            <input class="btn btn-danger" type="button" data-toggle="modal" data-target="#feeOut-form" value="( - ) Pengeluaran">
         </div>
         <div class="clearfix">
             <div class="form-group date" style="display:none;">

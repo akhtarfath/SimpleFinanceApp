@@ -20,9 +20,11 @@ class Finance extends CI_Controller {
 	{
 		$data['page_title'] = "Asambang | Finance";
 		
+		// Models FeeIn and FeeOut
 		$data['feeIn'] 		= $this->FeeIn->getAll();
 		$data['feeOut'] 	= $this->FeeOut->getAll();
 
+		// Libraries Day Date
 		$data['day']		= $this->daydate->thisDay();
 		$data['date']		= $this->daydate->thisDate(date('Y-m-d'));
 
@@ -33,6 +35,7 @@ class Finance extends CI_Controller {
 		$this->load->view('finance/feeIn-form', $data);
 		$this->load->view('finance/feeOut-form');
 		$this->load->view('finance/feeReport-form', $data);
+		$this->load->view('finance/feeDelete-modal');
 		$this->load->view('template/footer');
 		$this->load->view('libraries/footer');
 	}
@@ -48,7 +51,8 @@ class Finance extends CI_Controller {
 
 	public function removefee()
 	{
-		$feeOut = $this->FeeOut; 
+		$feeOut = $this->FeeOut;
+
 		$feeOut -> save();
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		

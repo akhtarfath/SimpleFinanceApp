@@ -6,11 +6,13 @@ class FeeOut extends CI_Model
 
     public function getAll()
     {
-        $this->db->select('
-            t_feeOut.*, t_categoryOut.* 
-        '); 
+        $dateTime = date('Y-m-d');
+        
+        $this->db->select('*'); 
         $this->db->join('t_categoryOut', 't_feeOut.id_categoryOut = t_categoryOut.id_categoryOut');
         $this->db->from('t_feeOut');
+        $this->db->where('t_feeOut.date_out', $dateTime);
+        $this->db->order_by('t_feeOut.time_out', 'ASC');
         $query = $this->db->get();
         
         return $query->result();
