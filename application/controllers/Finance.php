@@ -34,7 +34,6 @@ class Finance extends CI_Controller {
 		$this->load->view('finance/index', $data);
 		$this->load->view('finance/feeIn-form', $data);
 		$this->load->view('finance/feeOut-form');
-		$this->load->view('finance/feeReport-form', $data);
 		$this->load->view('finance/feeDelete-modal');
 		$this->load->view('template/footer');
 		$this->load->view('libraries/footer');

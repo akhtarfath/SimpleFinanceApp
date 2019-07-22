@@ -18,7 +18,7 @@ class Reports extends CI_Model
     {
         $post = $this->input->post();
             
-            $this->num_in       = uniqid();
+            $this->num_report   = uniqid();
             $this->date         = $post['dateIn'];
             $this->saldo        = $post['feeTotal'];
 
