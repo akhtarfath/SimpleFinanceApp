@@ -51,7 +51,6 @@ class Finance extends CI_Controller {
 	public function removefee()
 	{
 		$feeOut = $this->FeeOut;
-
 		$feeOut -> save();
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
@@ -65,35 +64,5 @@ class Finance extends CI_Controller {
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
 		echo '<script> window.location ="'. base_url() .'report"; </script>';
-	}
-
-	public function edit($id = null) 
-	{
-		if(!isset($id)) redirect('finance/index');
-		
-		$feeIn		= $this->feeIn;
-		$validation	= $this->form_validation;
-		$validation->set_rules($feeIn->rules());
-
-			if($validation->run())
-			{	
-				$feeIn->update();
-				$this->session->set_flashdata('success', 'Berhasil Di Simpan');
-				
-			}
-		
-		$data['feeIn']	= $feeIn->getById($id);
-		if(!$data['feeIn']) show_404();
-
-		$this->load->view('finance/index', $data);
-	}
-
-	public function delete($id = null) 
-	{
-		if(!isset($id)) show_404();
-		if($this->feeIn->delete($id))
-		{
-			redirect(site_url('finance/index'));
-		}
 	}
 }

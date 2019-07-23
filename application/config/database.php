@@ -75,9 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	// 'hostname' => 'sql311.unaux.com',
 	'hostname' => 'localhost',
+	// 'username' => 'unaux_24223902',
 	'username' => 'root',
+	// 'password' => 'px14nh8xu8tmtx',
 	'password' => '',
+	// 'database' => 'unaux_24223902_ab_finance',
 	'database' => 'ab_finance',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

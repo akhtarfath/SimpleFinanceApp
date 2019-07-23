@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2019 at 12:01 PM
+-- Generation Time: Jul 22, 2019 at 10:20 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -80,7 +80,7 @@ CREATE TABLE `t_feeIn` (
   `num_in` varchar(255) NOT NULL,
   `time_in` time NOT NULL,
   `fee_in` varchar(11) NOT NULL,
-  `category_in` int(11) NOT NULL,
+  `id_categoryIn` int(11) NOT NULL,
   `information` text NOT NULL,
   `date_in` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -89,12 +89,9 @@ CREATE TABLE `t_feeIn` (
 -- Dumping data for table `t_feeIn`
 --
 
-INSERT INTO `t_feeIn` (`num_in`, `time_in`, `fee_in`, `category_in`, `information`, `date_in`) VALUES
-('5d310c5d500b1', '07:18:21', '1200000', 1, 'Website Finance App', '2019-07-19'),
-('5d3110127d0db', '07:34:07', '50000', 2, 'Bayar Hutang', '2019-07-19'),
-('5d31c7be5ead3', '20:37:49', '3000', 2, 'Terima Kasih :\')', '2019-07-19'),
-('5d31cca2f00fa', '20:56:31', '100000', 5, 'Jadi Ojek', '2019-07-19'),
-('5d31ccf4b70e7', '20:59:59', '100000', 2, 'Lagi Baik', '2019-07-19');
+INSERT INTO `t_feeIn` (`num_in`, `time_in`, `fee_in`, `id_categoryIn`, `information`, `date_in`) VALUES
+('5d3612370f3ab', '02:44:38', '500000', 1, 'Alhamdulillah', '2019-07-23'),
+('5d3617873a96b', '03:07:15', '700000', 1, 'Bayar Utang', '2019-07-23');
 
 -- --------------------------------------------------------
 
@@ -106,7 +103,7 @@ CREATE TABLE `t_feeOut` (
   `num_out` varchar(255) NOT NULL,
   `time_out` time NOT NULL,
   `fee_out` varchar(11) NOT NULL,
-  `category_out` int(11) NOT NULL,
+  `id_categoryOut` int(11) NOT NULL,
   `information` text NOT NULL,
   `date_out` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -115,13 +112,8 @@ CREATE TABLE `t_feeOut` (
 -- Dumping data for table `t_feeOut`
 --
 
-INSERT INTO `t_feeOut` (`num_out`, `time_out`, `fee_out`, `category_out`, `information`, `date_out`) VALUES
-('5d310f81986d9', '07:30:35', '10000', 2, 'Baso', '2019-07-19'),
-('5d3113df03213', '07:50:18', '13000', 3, 'Nescafe', '2019-07-19'),
-('5d314fd7516fd', '12:06:09', '200000', 2, 'Traktir Temen', '2019-07-19'),
-('5d314ffe85cfd', '12:06:31', '100000', 4, 'Nonton Bareng Doi', '2019-07-19'),
-('5d315b88eb88c', '12:55:58', '2000', 5, 'Parkir', '2019-07-19'),
-('5d31ca4b3d25e', '20:48:21', '75000', 2, 'Buat 4 Orang', '2019-07-19');
+INSERT INTO `t_feeOut` (`num_out`, `time_out`, `fee_out`, `id_categoryOut`, `information`, `date_out`) VALUES
+('5d3612db1ca4a', '02:47:13', '15000', 2, 'Ayam Geprek', '2019-07-23');
 
 -- --------------------------------------------------------
 
@@ -130,10 +122,17 @@ INSERT INTO `t_feeOut` (`num_out`, `time_out`, `fee_out`, `category_out`, `infor
 --
 
 CREATE TABLE `t_reports` (
-  `num_reports` varchar(11) NOT NULL,
+  `num_report` varchar(11) NOT NULL,
   `date` date NOT NULL,
   `saldo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_reports`
+--
+
+INSERT INTO `t_reports` (`num_report`, `date`, `saldo`) VALUES
+('5d3617931e4', '2019-07-23', 1185000);
 
 --
 -- Indexes for dumped tables
@@ -157,22 +156,21 @@ ALTER TABLE `t_categoryOut`
 ALTER TABLE `t_feeIn`
   ADD PRIMARY KEY (`num_in`),
   ADD KEY `date_in` (`date_in`),
-  ADD KEY `category_in` (`category_in`);
+  ADD KEY `category_in` (`id_categoryIn`);
 
 --
 -- Indexes for table `t_feeOut`
 --
 ALTER TABLE `t_feeOut`
   ADD PRIMARY KEY (`num_out`),
-  ADD KEY `category_out` (`category_out`),
+  ADD KEY `category_out` (`id_categoryOut`),
   ADD KEY `date_out` (`date_out`);
 
 --
 -- Indexes for table `t_reports`
 --
 ALTER TABLE `t_reports`
-  ADD PRIMARY KEY (`num_reports`),
-  ADD UNIQUE KEY `date` (`date`);
+  ADD PRIMARY KEY (`num_report`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -198,20 +196,13 @@ ALTER TABLE `t_categoryOut`
 -- Constraints for table `t_feeIn`
 --
 ALTER TABLE `t_feeIn`
-  ADD CONSTRAINT `t_feeIn_ibfk_1` FOREIGN KEY (`category_in`) REFERENCES `t_categoryIn` (`id_categoryIn`);
+  ADD CONSTRAINT `t_feeIn_ibfk_1` FOREIGN KEY (`id_categoryIn`) REFERENCES `t_categoryIn` (`id_categoryIn`);
 
 --
 -- Constraints for table `t_feeOut`
 --
 ALTER TABLE `t_feeOut`
-  ADD CONSTRAINT `t_feeOut_ibfk_1` FOREIGN KEY (`category_out`) REFERENCES `t_categoryOut` (`id_categoryOut`);
-
---
--- Constraints for table `t_reports`
---
-ALTER TABLE `t_reports`
-  ADD CONSTRAINT `t_reports_ibfk_1` FOREIGN KEY (`date`) REFERENCES `t_feeIn` (`date_in`),
-  ADD CONSTRAINT `t_reports_ibfk_2` FOREIGN KEY (`date`) REFERENCES `t_feeOut` (`date_out`);
+  ADD CONSTRAINT `t_feeOut_ibfk_1` FOREIGN KEY (`id_categoryOut`) REFERENCES `t_categoryOut` (`id_categoryOut`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
