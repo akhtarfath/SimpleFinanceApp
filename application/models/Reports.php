@@ -7,13 +7,10 @@ class Reports extends CI_Model
 
     public function getAll()
     {
-        $dateTime = date('Y-m-d');
 
         $this->db->select('t_reports.*, t_reports.saldo as saldo_total');
         $this->db->from('t_reports');
-        $this->db->where('t_reports.date', $dateTime);
         $this->db->order_by('t_reports.num_report', 'DESC');
-        $this->db->limit('1');
         $query = $this->db->get();
 
         return $query->result();

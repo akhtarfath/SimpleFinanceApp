@@ -95,7 +95,7 @@
                                             <b> Saldo = 
                                                 <?= number_format($feeIn,2,',','.'); ?> 
                                                     - 
-                                                <?= number_format($feeOut,0,',','.'); ?> 
+                                                <?= number_format($feeOut,2,',','.'); ?> 
                                             </b>
                                         </td>
 
@@ -157,6 +157,7 @@
                         <div class="card-body modal-header">
                             <h4 class="box-title"> 
                                 Buat Laporan Keuangan Anda <button type="button" class="close" data-dismiss="modal"> &times; </button>
+                                <small id="emailHelp" class="form-text text-muted"> Jika ingin membuat laporan ditanggal yang sama, tolong hapus terlebih dahulu laporan sebelumnya dengan tanggal yang sama. Terima Kasih </small>
                             </h4>
                         </div>
                         <div class="card-body modal-body">
