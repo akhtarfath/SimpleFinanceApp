@@ -39,6 +39,18 @@ class Finance extends CI_Controller {
 		$this->load->view('libraries/footer');
 	}
 
+	public function delete()
+	{
+		$data['page_title'] = "Asambang | Delete";
+		
+		// Models FeeIn and FeeOut
+		$data['feeIn'] 		= $this->FeeIn->getAll();
+		$data['feeOut'] 	= $this->FeeOut->getAll();
+
+		$this->load->view('libraries/header', $data);
+		$this->load->view('finance/delete_finance', $data);
+	}
+
 	public function addfee()
 	{
 		$feeIn = $this->FeeIn; 
@@ -61,6 +73,7 @@ class Finance extends CI_Controller {
 	{
 		$reports = $this->Reports;
 		$reports -> save();
+			
 		$this->session->set_flashdata('success', 'Berhasil Di Simpan');	
 		
 		echo '<script> window.location ="'. base_url() .'report"; </script>';

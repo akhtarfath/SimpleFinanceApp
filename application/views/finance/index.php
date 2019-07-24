@@ -1,4 +1,19 @@
-<?php error_reporting(1); ?>
+<?php error_reporting(1); 
+
+    $dns  = "mysql:host=127.0.0.1; dbname=ab_finance";
+    $user = "root";
+    $pass = "";
+
+    try {
+
+        $conn = new PDO($dns, $user, $pass);
+        // echo "success connect!";
+    }
+    catch(PDOException $e) {
+        echo "Connection Failed".$e->getMessage();
+    }
+
+?>
 <!-- Content -->
 <div class="content">
     <!-- Animated -->
@@ -7,9 +22,29 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                <?php if($_GET['date']) 
+                    {
+                        $tanggal = $_GET['date'];
+
+                            $data[] = $tanggal;
+                            $data[] = $tanggal;
+
+                        $query   = 'SELECT * FROM t_feeIn INNER JOIN t_feeOut 
+                                    ON t_feeIn.date_in = t_feeOut.date_out
+                                    INNER JOIN t_categoryIn
+                                    ON t_feeIn.id_categoryIn = t_categoryIn.id_categoryIn
+                                    INNER JOIN t_categoryOut
+                                    ON t_feeOut.id_categoryOut = t_categoryOut.id_categoryOut
+                                    WHERE t_feeIn.date_in = ? AND t_feeOut.date_out = ?';
+                        $row     = $conn -> prepare($query);
+                        $row    -> execute($data); 
+                        $result  = $row->fetchAll();
+                ?>
                     <div class="card-body head-finance">
-                        <h3 class="box-title"> Keuangan <span style="text-align: right; position: absolute; right: 20px;"><?= $day.', '.$date;?></span></h3>
-                        <small> Data akan tersimpan otomatis setelah 24 jam </small>
+                        <h3 class="box-title"> Riwayat Keuangan 
+                            <span style="text-align: right; position: absolute; right: 20px;"><?= $tanggal; ?></span>
+                        </h3>
+                        <small> Maaf, anda hanya bisa melihat riwayat keuangan anda </small>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -23,25 +58,129 @@
                                             <th class="field pemasukkan" style="border-bottom: 1px solid #eee; text-align: left;"> keterangan </td>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
                                             <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> harga </th>
-                                            <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> aksi </th>
+
                                         </tr>
-                                <?php $no = 1;
-                                    foreach($feeIn as $masuk): $status = "(+)"; $In[] = $masuk->fee_in;?> 
+                                <?php $no = 1; foreach($result as $hasil): $status = "(+)"; $In[] = $hasil['fee_in']; ?> 
+                                        <tr>
+                                            <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $hasil['time_in']; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $hasil['cat_name_in']; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $hasil['information_in']; ?></td>
+                                            <td class="field" style="text-align: center;"><?= $status; ?></td>
+                                            <td class="field" style="text-align: right;">
+                                                <?= number_format($hasil['fee_in'],2,',','.'); ?>
+                                            </td>
+                                        </tr>
+                            <?php $no++; $feeIn = array_sum($In); endforeach; ?>
+                                <tr>
+                                <?php if($feeIn == null) { $feeIn = 0; ?>
+
+                                <?php } else { ?>
+                                    <td class="field" colspan="5" style="border-bottom: 1px solid #eee;"><b> Total Pemasukkan </b></td>
+                                    <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeIn,2,',','.'); ?></b></td>
+                                    <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b></b></td>
+                                <?php } ?>
+                                </tr>
+                            <?php foreach($result as $isi): $status = "(-)"; $Out[] = $isi['fee_out']; ?>
+                                        <tr>
+                                            <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $isi['time_out']; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $isi['cat_name_out']; ?></td>
+                                            <td class="field" style="text-transform: lowercase;"><?= $isi['information_out']; ?></td>
+                                            <td class="field" style="text-align: center;"><?= $status; ?></td>
+                                            <td class="field" style="text-align: right;">
+                                                <?= number_format($isi['fee_out'],2,',','.'); ?>
+                                            </td>
+                                        </tr>
+                            <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
+                                <tr>
+                                <?php if($feeOut == null) { $feeOut = 0; ?>
+
+                                <?php } else { ?>
+                                    <td class="field" colspan="5" style="border-bottom: 1px solid #eee;"><b> Total Pengeluaran </b></td>
+                                    <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeOut,2,',','.'); ?></b></td>
+                                    <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b></b></td>
+                                <?php } ?>
+                                </tr>
+                                </table>
+                            </div>
+                        </div> <!-- /.card-body -->
+                        <div class="card-body">                                
+                            <table style="width: 100%; border-top: 1px solid #eee;">
+                                <tr>
+
+                                <?php if($feeIn == null && $feeOut == null) { $feeIn = 0; $feeOut = 0; ?> 
+
+                                    <td class="field" colspan="2">
+                                        <b> Saldo </b>
+                                    </td>
+                                    
+                                    <?php $total = ($feeIn - $feeOut); $masuk->fee_in = $total; ?>
+                                    
+                                    <td class="field" style="text-align: right;" colspan="3">
+                                        <b><?= number_format($total,2,',','.'); ?></b>
+                                    </td>
+
+                                <?php } else { ?>
+
+                                    <td class="field" colspan="2">
+                                        <b> Saldo = 
+                                            <?= number_format($feeIn,2,',','.'); ?> 
+                                                - 
+                                            <?= number_format($feeOut,2,',','.'); ?> 
+                                        </b>
+                                    </td>
+
+                                <?php $total = ($feeIn - $feeOut); $masuk->fee_in = $total; ?>
+                                    
+                                    <td class="field" style="text-align: right;" colspan="3">
+                                        <b><?= number_format($total,2,',','.'); ?></b>
+                                    </td>
+
+                                <?php } ?>
+                                </tr>
+                                <?  } else { ?>
+
+
+
+
+                        <div class="card-body head-finance">
+                            <h3 class="box-title"> Input Keuangan <span style="text-align: right; position: absolute; right: 20px;"><?= $day.', '.$date;?></span></h3>
+                            <small> Data akan tersimpan otomatis setelah 24 jam </small>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-body finance">
+                                    <div class="card-body data-finance">
+                                        <table style="width: 100%;" class="table table-hover" id="dataTable" cellspacing="0">
+                                            <tr>
+                                                <th class="field no" style="border-bottom: 1px solid #eee; text-align: left;"> no </th>
+                                                <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> waktu </th>
+                                                <th class="field" style="border-bottom: 1px solid #eee; text-align: left;"> penggunaan </th>
+                                                <th class="field pemasukkan" style="border-bottom: 1px solid #eee; text-align: left;"> keterangan </td>
+                                                <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> # </th>
+                                                <th class="field" style="border-bottom: 1px solid #eee; text-align: right;"> harga </th>
+                                                <th class="field" style="border-bottom: 1px solid #eee; text-align: center;"> aksi </th>
+
+                                            </tr>
+                                            </tr>
+                                    <?php $no = 1; foreach($feeIn as $masuk): $status = "(+)"; $In[] = $masuk->fee_in;?> 
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $masuk->time_in; ?></td>
-                                                <td class="field" style="text-transform: lowercase;"><?= $masuk->cat_name; ?></td>
-                                                <td class="field" style="text-transform: lowercase;"><?= $masuk->information; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $masuk->cat_name_in; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $masuk->information_in; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
-                                                <td class="field" style="text-align: right;"><?= number_format($masuk->fee_in,2,',','.'); ?></td>
+                                                <td class="field" style="text-align: right;">
+                                                    <?= number_format($masuk->fee_in,2,',','.'); ?>
+                                                </td>
                                                 <td class="field" style="text-align: center;">
-                                                    <a onclick="deleteConfirm('<?= site_url().'finance/delete/'.$masuk->num_in; ?>')" href="#delete" class="btn btn-small text-danger">&times;</a>
+                                                    <a href="<?= base_url().'finance/delete/?num_in='.$masuk->num_in; ?>" class="btn btn-small text-danger">&times;</a>
                                                 </td>
                                             </tr>
                                 <?php $no++; $feeIn = array_sum($In); endforeach; ?>
                                     <tr>
                                     <?php if($feeIn == null) { $feeIn = 0; ?>
-
                                     <?php } else { ?>
                                         <td class="field" colspan="5" style="border-bottom: 1px solid #eee;"><b> Total Pemasukkan </b></td>
                                         <td class="field" style="border-bottom: 1px solid #eee; border-top: 1px solid #eee; text-align: right;"><b><?= number_format($feeIn,2,',','.'); ?></b></td>
@@ -52,12 +191,14 @@
                                             <tr>
                                                 <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
                                                 <td class="field" style="text-transform: lowercase;"><?= $keluar->time_out; ?></td>
-                                                <td class="field" style="text-transform: lowercase;"><?= $keluar->cat_name; ?></td>
-                                                <td class="field" style="text-transform: lowercase;"><?= $keluar->information; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $keluar->cat_name_out; ?></td>
+                                                <td class="field" style="text-transform: lowercase;"><?= $keluar->information_out; ?></td>
                                                 <td class="field" style="text-align: center;"><?= $status; ?></td>
-                                                <td class="field" style="text-align: right;"><?= number_format($keluar->fee_out,2,',','.'); ?></td>
+                                                <td class="field" style="text-align: right;">
+                                                    <?= number_format($keluar->fee_out,2,',','.'); ?>
+                                                </td>
                                                 <td class="field" style="text-align: center;">
-                                                    <a onclick="deleteConfirm('<?= site_url('finance/delete/'.$keluar->num_out); ?>')" href="#delete" class="btn btn-small text-danger">&times;</a>
+                                                    <a href="<?= base_url().'finance/delete/?num_out='.$keluar->num_out; ?>" class="btn btn-small text-danger">&times;</a>
                                                 </td>
                                             </tr>
                                 <?php $no++; $feeOut = array_sum($Out); endforeach; ?>
@@ -76,15 +217,11 @@
                             <div class="card-body">                                
                                 <table style="width: 100%; border-top: 1px solid #eee;">
                                     <tr>
-
                                     <?php if($feeIn == null && $feeOut == null) { $feeIn = 0; $feeOut = 0; ?> 
-
                                         <td class="field" colspan="2">
                                             <b> Saldo </b>
                                         </td>
-                                        
                                         <?php $total = ($feeIn - $feeOut); $masuk->fee_in = $total; ?>
-                                        
                                         <td class="field" style="text-align: right;" colspan="3">
                                             <b><?= number_format($total,2,',','.'); ?></b>
                                         </td>
@@ -106,8 +243,13 @@
                                         </td>
 
                                     <?php } ?>
-                                    
                                     </tr>
+
+
+
+
+
+                                <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -116,6 +258,20 @@
                 </div>
             </div><!-- /# column -->
         </div>
+        <?php if($_GET['date']) 
+                {
+                    $tanggal = $_GET['date'];
+
+                        $data[] = $tanggal;
+                        $data[] = $tanggal;
+
+                    $query   = 'SELECT * FROM t_feeIn INNER JOIN t_feeOut ON t_feeIn.date_in = t_feeOut.date_out
+                                WHERE t_feeIn.date_in = ? AND t_feeIn.date_out = ?';
+                    $row     = $conn -> prepare($query);
+                    $row    -> execute($data); 
+        ?>
+
+        <?  } else { ?>
         <!--  /Traffic -->
         <div class="clearfix">
             <input class="btn btn-success" type="button" data-toggle="modal" data-target="#feeIn-form" value="( + ) Pemasukkan">
@@ -137,6 +293,7 @@
                     data-target="#feeReport-form" value="( ! ) Buat Laporan">
             </div>
         </div>
+        <?php } ?>
     <!-- /#add-category -->
     </div>
     <!-- .animated -->
@@ -157,7 +314,9 @@
                         <div class="card-body modal-header">
                             <h4 class="box-title"> 
                                 Buat Laporan Keuangan Anda <button type="button" class="close" data-dismiss="modal"> &times; </button>
-                                <small id="emailHelp" class="form-text text-muted"> Jika ingin membuat laporan ditanggal yang sama, tolong hapus terlebih dahulu laporan sebelumnya dengan tanggal yang sama. Terima Kasih </small>
+                                <small id="emailHelp" class="form-text text-muted" style="color: red !important;"> 
+                                    Jika ingin membuat laporan ditanggal yang sama, tolong hapus terlebih dahulu laporan sebelumnya pada tanggal yang sama. Terima Kasih 
+                                </small>
                             </h4>
                         </div>
                         <div class="card-body modal-body">
@@ -220,7 +379,7 @@
 
 <style>
     .card-body.finance {
-        height: 365px;
+        height: 330px;
         overflow: auto;
         max-height: 365px;
     }

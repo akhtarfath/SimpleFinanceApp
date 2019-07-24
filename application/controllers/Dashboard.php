@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 
+		$this->load->model('DashboardModel');
 		$this->load->model('FeeIn');
 		$this->load->model('FeeOut');
 	}
@@ -16,6 +17,9 @@ class Dashboard extends CI_Controller {
 	{
         $data["page_title"] = 'AsamBang | Dashboard';
 		
+		$data['allIn']	= $this->DashboardModel->getIn();
+		$data['allOut']	= $this->DashboardModel->getOut();
+		$data['nabung']	= $this->DashboardModel->getReport();
 		$data['feeIn'] 		= $this->FeeIn->getAll();
 		$data['feeOut'] 	= $this->FeeOut->getAll();
 

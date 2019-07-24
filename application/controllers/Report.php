@@ -24,4 +24,14 @@ class Report extends CI_Controller {
 		$this->load->view('template/footer');
 		$this->load->view('libraries/footer');
 	}
+
+	public function delete()
+	{
+		$data['page_title'] = "Asambang | Delete";
+
+		$data['reports'] = $this->Reports->getAll();
+
+		$this->load->view('libraries/header', $data);
+		$this->load->view('report/delete_report', $data);
+	}
 }

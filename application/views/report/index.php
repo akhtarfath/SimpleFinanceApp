@@ -23,12 +23,20 @@
                             <?php $no = 1; foreach($reports as $laporan): $jumLaporan[] = $laporan->saldo;?> 
                                     <tr>
                                         <td class="field no" style="background: #eee; background: #f7f7f7; text-align: center;"><?= $no; ?></td>
-                                        <td class="field" style="text-transform: lowercase;"><?= $laporan->date; ?></td>
+                                        <td class="field" style="text-transform: lowercase;">
+                                            <a href="<?= base_url().'finance/?date='.$laporan->date; ?>">
+                                                <?= $laporan->date; ?>
+                                            </a>
+                                            <br>
+                                            <small>
+                                                Klik tanggal untuk melihat riwayat keuangan
+                                            </small>
+                                        </td>
                                         <td class="field" style="text-align: right;">
                                             <?= number_format($laporan->saldo_total,2,',','.'); ?>
                                         </td>
                                         <td class="field" style="text-align: center;">
-                                            <a onclick="deleteConfirm('<?= site_url().'finance/delete/'.$laporan->num_report ?>')" href="#delete" class="btn btn-small text-danger">&times;</a>
+                                            <a href="<?= base_url().'report/delete/?num_report='.$laporan->num_report; ?>" class="btn btn-small text-danger">&times;</a>
                                         </td>
                                     </tr>
                             <?php $no++; $laporanIn = array_sum($jumLaporan); endforeach; ?>
